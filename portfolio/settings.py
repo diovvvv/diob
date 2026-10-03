@@ -27,6 +27,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-c15!78!$t+d@r7z9(a^$$4qeq4
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost,.pythonanywhere.com').split(',')
+CSRF_TRUSTED_ORIGINS = [
+    'https://diov.pythonanywhere.com',
+]
 
 
 # Application definition
