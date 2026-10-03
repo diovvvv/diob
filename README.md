@@ -7,4 +7,6 @@ Driven by the challenge of bridging the gap between hardware precision and softw
 1. **Clone the repository:**
    ```bash
    git clone <your-repo-url>
-   cd <repo-folder>
+   cd <repo-folder> 
+## Live Deployment 
+- **Live Site:** https://diov.pythonanywhere.com 
