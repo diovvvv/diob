@@ -1,0 +1,8 @@
+<h2>Create Tech Stack</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit Tech Stack</button>
+</form>
+<br>
+<a href="{% url 'admin_tech_stack_list' %}">Back to Tech Stacks Table</a>

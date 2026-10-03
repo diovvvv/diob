@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Projects</title>
+    <meta charset="UTF-8">
+    <title>Dashboard - Projects</title>
 </head>
 <body>
-    <h1>Projects</h1>
-    <ul>
-        {% for project in projects %}
-            <li>
-                <a href="{% url 'project_detail' pk=project.pk %}">
-                    {{ project.project_name }}
-                </a>
-            </li>
-        {% empty %}
-            <li>No projects found.</li>
-        {% endfor %}
-    </ul>
+    <h1>Project List (Dashboard)</h1>
+
+    <!-- Requirement 3: Navigation and Create Buttons -->
+    <div style="margin-bottom: 15px;">
+        <a href="{% url 'create_project' %}"><button>Create New Project</button></a>
+        <a href="{% url 'admin_tech_stack_list' %}"><button>View Tech Stacks Table</button></a>
+    </div>
+
+    <!-- Requirement 2: Table of Projects -->
+    <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Description</th>
+                <th>tech_stack</th>
+                <th>link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.project_name }}</td>
+                <td>{{ project.description|truncatechars:50 }}</td>
+                <td>
+                    {% for ts in project.tech_stack.all %}
+                        {{ ts.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        None
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if project.link %}
+                        <a href="{{ project.link }}" target="_blank">View Project</a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No projects available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

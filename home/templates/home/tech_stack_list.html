@@ -1,0 +1,30 @@
+<h2>Admin Dashboard - Tech Stacks</h2>
+<a href="{% url 'create_tech_stack' %}"><button>Create New Tech Stack</button></a>
+<a href="{% url 'admin_project_list' %}"><button>View Projects</button></a>
+
+<table border="1" cellpadding="8" style="margin-top: 15px; width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>Tech Stack Name</th>
+      <th>Project It Was Used</th>
+      <th>Date when this tech stack was added</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ts in tech_stacks %}
+    <tr>
+      <td>{{ ts.name }}</td>
+      <td>
+        {% for proj in ts.projects.all %}
+          {{ proj.project_name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+          None
+        {% endfor %}
+      </td>
+      <td>{{ ts.created_at|date:"Y-m-d H:i" }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No tech stacks available.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
